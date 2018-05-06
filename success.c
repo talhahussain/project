@@ -71,7 +71,7 @@ int read(void *no){
 
 static int __init read_write(void){
 
-	char th[10] = "Our thread";
+	char th[8] = "thread0";
 	int i=0;
 	printk(KERN_INFO "\nInserting module for reader writer\n");
 	printk(KERN_INFO "Initializing semaphore for writer\n");
@@ -90,6 +90,7 @@ static int __init read_write(void){
 	}
 
 	for(i=0; i<parm_reader; i++){
+		th[7] = (char)(32+i);
 		thread2[i] = kthread_create(read, i, th);
 		if((thread2[i])){
 			printk(KERN_INFO "waking up thread %d\n",i);

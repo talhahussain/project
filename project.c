@@ -71,7 +71,7 @@ int read(void *no){
 
 asmlinkage int sys_readwrite(void){
 
-	char th[10] = "Our thread";
+	char th[8] = "thread0";
 	int i=0;
 	printk(KERN_INFO "\nInserting module for reader writer\n");
 	printk(KERN_INFO "Initializing semaphore for writer\n");
@@ -88,7 +88,9 @@ asmlinkage int sys_readwrite(void){
 		wake_up_process(thread1);
 	}
 	for(i=0; i<parm_reader; i++){
+		th[7] = (char)(32+i);
 		thread2[i] = kthread_create(read, i, th);
+		
 		if((thread2[i])){
 			printk(KERN_INFO "waking up thread %d\n",i);
 			wake_up_process(thread2[i]);
