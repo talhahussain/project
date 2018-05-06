@@ -69,7 +69,7 @@ int read(void *no){
 	return 0;
 }
 
-asmlinkage int sys_readwrite(void){
+asmlinkage long sys_readwrite(void){
 
 	char th[8] = "thread0";
 	int i=0;
